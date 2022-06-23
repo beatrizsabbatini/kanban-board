@@ -1,6 +1,6 @@
 import IStatus from "../interfaces/IStatus";
 
-const statuses: string[] = [
+const statuses: IStatus[] = [
   IStatus.BACKLOG,
   IStatus.TO_DO,
   IStatus.DOING,

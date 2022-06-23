@@ -21,6 +21,3 @@ export const StatusesColumnsContainer = styled.div`
   align-items: flex-start;
   justify-content: space-between;
 `
-export const Column = styled.div`
-  width: 300px;
-`

@@ -9,18 +9,17 @@ export const CardContainer = styled.div`
 
   width: 300px;
   height: 110px;
+  margin: 0.7rem 0;
+  padding: 1.2rem 1rem 0.7rem 1rem;
+
+  border-radius: 5px;
+  border: 1px solid ${({theme}) => theme.colors.border};
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  margin: 0.7rem 0;
-  padding: 1.2rem 1rem 0.7rem 1rem;
-
   position: relative;
-
-  border-radius: 5px;
-  border: 1px solid ${({theme}) => theme.colors.border};
 
   cursor: pointer;
 
