@@ -10,6 +10,7 @@ declare module 'styled-components' {
       bug: string,
       deploy: string,
       infra: string,
+      refactor: string,
       text_primary: string,
       text_secondary: string,
       text_tertiary: string,

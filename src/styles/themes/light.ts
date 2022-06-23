@@ -4,9 +4,10 @@ const lightTheme = {
   colors: {
     primary: '#EB622F',
     feature: '#F47E52',
-    bug: '#EE6666',
+    bug: '#DB4B4B',
     deploy: '#71E567',
-    infra: '#525BCF',
+    refactor: '#7352CF',
+    infra: '#131FC2',
     text_primary: '#656565',
     text_secondary: '#505050',
     text_tertiary: '#939393',

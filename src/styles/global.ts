@@ -16,11 +16,24 @@ export default createGlobalStyle`
 
   h1 {
     font-size: 3rem;
+    padding-bottom: 1rem;
     color: ${({ theme }) => theme.colors.text_secondary};
 
     span{
       color: ${({ theme }) => theme.colors.primary};
     }
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.1rem;
+  }
+
+  p {
+    color: ${({ theme }) => theme.colors.text_tertiary};
   }
  
 `
