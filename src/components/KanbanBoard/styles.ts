@@ -15,7 +15,12 @@ export const SwitchIcon = styled.img`
 `
 
 export const StatusesColumnsContainer = styled.div`
+  padding-top: 4rem;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: space-between;
+`
+export const Column = styled.div`
+  width: 300px;
 `
