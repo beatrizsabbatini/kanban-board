@@ -24,7 +24,7 @@ interface KanbanBoardProps {
 
 const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
   const { colors, title } = useContext(ThemeContext);
-  const { cards } = useAppSelector((state => state.cards));
+  const { cards, filteredCards } = useAppSelector((state => state.cards));
   const { columns } = useAppSelector((state => state.columns));
   const { visible } = useModal();
 
@@ -132,7 +132,8 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
                 const cardsArray: ICard[] = [];
 
                 column.cardsIds.forEach(cardId => {
-                  const foundedCard = cards.find(card => card.id === cardId);
+                  const displayCards = filteredCards ? filteredCards : cards;
+                  const foundedCard = displayCards.find(card => card.id === cardId);
                   if (foundedCard) cardsArray.push(foundedCard);
                 })
               

@@ -5,22 +5,20 @@ import ICard from "../../interfaces/ICard";
 
 interface CardsSliceState {
   cards: ICard[],
-  // isDragging: boolean
+  filteredCards: ICard[] | undefined
 }
 
 const initialState: CardsSliceState = {
   cards: mockCards,
-  // isDragging: false
+  filteredCards: undefined
 }
 
 export const cardsSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    // setIsDragging: (state, action) => state.isDragging = action.payload,
     setCards: (state, action) => {
       state.cards = action.payload
-      // state.isDragging = false
     },
     updateOneCard: (state, action) => {
       const cardId = action.payload.id;
@@ -31,10 +29,19 @@ export const cardsSlice = createSlice({
       })
 
       state.cards = updatedCards;
+    },
+    filterCards: (state, action) => {
+      const searchText = action.payload;
+
+      const filteredCards = [...state.cards]
+      .filter(card => card.title.toUpperCase()
+      .includes(searchText.toUpperCase()));
+
+      state.filteredCards = filteredCards;
     }
   }
 })
 
-export const { setCards, updateOneCard } = cardsSlice.actions;
+export const { setCards, updateOneCard, filterCards } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
