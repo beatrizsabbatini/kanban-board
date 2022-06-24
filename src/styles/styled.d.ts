@@ -18,7 +18,10 @@ declare module 'styled-components' {
       background: string,
       components_background: string,
       border: string,
-      switch: string
+      switch: string,
+      scrollbar_background: string,
+      scrollbar_thumb: string,
+      scrollbar_thumb_hover: string,
     }
   }
 }

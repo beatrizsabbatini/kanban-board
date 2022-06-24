@@ -15,7 +15,10 @@ const darkTheme = {
     background: '#1B1B1B',
     components_background: '#2E2E2E',
     border: '#434343',
-    switch: '#505050'
+    switch: '#505050',
+    scrollbar_background: '#2E2E2E',
+    scrollbar_thumb: '#505050',
+    scrollbar_thumb_hover: '#636363',
   },
 
 }

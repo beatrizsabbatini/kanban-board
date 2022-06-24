@@ -15,7 +15,10 @@ const lightTheme = {
     background: '#F7F5F4',
     components_background: '#FFFFFF',
     border: '#D8D8D8',
-    switch: '#EB622F'
+    switch: '#EB622F',
+    scrollbar_background: '#E7E7E7',
+    scrollbar_thumb: '#D0D0D0',
+    scrollbar_thumb_hover: '#BBBBBB',
   },
 }
 
