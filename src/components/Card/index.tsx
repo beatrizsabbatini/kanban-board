@@ -36,7 +36,6 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
             <Badge category={card.category}/>
             <p>+ View More</p>
           </CardBottom>
-
         </CardContainer>
       )}
     </Draggable>
