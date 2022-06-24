@@ -33,15 +33,17 @@ export const cardsSlice = createSlice({
       const searchText = action.payload.searchText || '';
       const categories = action.payload.categories || Object.values(ICategory);
 
+      console.log("categories: ", categories)
+
       const filteredCards = [...state.cards]
         .map(card => {
             if (searchText.length > 0){
               if (card.title.toUpperCase()
                 .includes(searchText.toUpperCase()) && categories
                 .includes(card.category)
-                ) return card
+                ) return {...card, hidden: false}
             } else {
-              if (categories.includes(card.category)) return card
+              if (categories.includes(card.category)) return {...card, hidden: false}
             }
             return {...card, hidden: true}
           }

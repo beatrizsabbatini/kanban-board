@@ -152,7 +152,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
           </div>
           <div>
             <SearchInput/>
-            {/* <FiltersContainer>
+            <FiltersContainer>
               {Object.values(ICategory).map(category => (
                 <LabelContainer color={() => getCategoryBackgroundColor(theme, category)}>
                   <input 
@@ -165,7 +165,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
                   <label>{category}</label>
                 </LabelContainer>
               ))}
-          </FiltersContainer> */}
+          </FiltersContainer>
           </div>
           
         </Header>

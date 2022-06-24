@@ -39,7 +39,7 @@ export const CardContainer = styled.div<CardContainerProps>`
 export const CardBorder = styled.div<ColorProps>`
   cursor: grab;
   position: absolute;
-  width: calc(100% + 1px);
+  width: calc(100% + 2px);
   top: -1px;
   left: -1px;
   border-top-left-radius: 5px;
