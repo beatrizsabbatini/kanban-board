@@ -29,7 +29,6 @@ export const StatusesColumnsContainer = styled.div`
   flex-direction: row;
   align-items: flex-start;
   gap: 1.5rem;
-  overflow: auto;
 `
 
 export const Header = styled.div`
@@ -62,12 +61,14 @@ export const LabelContainer = styled.div<LabelContainerProps>`
   align-items: center;
   justify-content:space-between ;
   border-radius: 5px;
+  cursor: pointer;
 
   label{
     font-weight: bold;
     color: #fff;
     padding-left: 5px;
     text-transform: uppercase;
+    cursor: pointer;
   }
 `
 

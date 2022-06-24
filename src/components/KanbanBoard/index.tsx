@@ -154,7 +154,10 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
             <SearchInput/>
             <FiltersContainer>
               {Object.values(ICategory).map(category => (
-                <LabelContainer color={() => getCategoryBackgroundColor(theme, category)}>
+                <LabelContainer 
+                  color={() => getCategoryBackgroundColor(theme, category)}
+                  onClick={() => handleChangeCheckbox(category)}
+                >
                   <input 
                     type='checkbox' 
                     name={category} 

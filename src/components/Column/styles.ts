@@ -20,5 +20,9 @@ export const Container = styled.div<ContainerProps>`
 `
 
 export const CardsList = styled.div`
+  margin-top: 1rem;
   height: 60vh;
+  width: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;

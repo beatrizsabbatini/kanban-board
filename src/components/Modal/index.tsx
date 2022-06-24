@@ -62,15 +62,20 @@ const Modal: React.FC<ModalProps> = ({visible}) => {
         <MultilineInput aria-multiline value={description} onChange={(e) => setDescription(e.target.value)}/>
         <CategoriesContainer>
           {Object.values(ICategory).map(category => (
-            <LabelContainer color={() => getCategoryBackgroundColor(theme, category)}>
-              <input 
-                type='radio' 
-                name={category} 
-                value={category} 
-                checked={cardCategory === category}
-                onChange={(e) => setCardCategory(e.currentTarget.value as ICategory)}
-              />
-              <label>{category}</label>
+            <LabelContainer 
+              color={() => getCategoryBackgroundColor(theme, category)}
+             
+            >
+              <label>
+                <input 
+                  type='radio' 
+                  name={category} 
+                  value={category} 
+                  checked={cardCategory === category}
+                  onChange={(e) => setCardCategory(e.currentTarget.value as ICategory)}
+                />
+                <i>{category}</i>
+              </label>
             </LabelContainer>
           ))}
         </CategoriesContainer>

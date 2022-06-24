@@ -78,10 +78,12 @@ export const LabelContainer = styled.div<LabelContainerProps>`
   justify-content:space-between ;
   border-radius: 5px;
 
-  label{
+  i{
+    font-style: normal;
     font-weight: bold;
     color: #fff;
     padding-left: 5px;
     text-transform: uppercase;
+    cursor: pointer;
   }
 `
