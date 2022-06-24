@@ -5,8 +5,8 @@
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.2",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^13.0.0",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
@@ -25,7 +25,7 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-   "predeploy": "yarn run build",
+    "predeploy": "yarn run build",
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -54,8 +54,12 @@
     "styled-components": "^5"
   },
   "devDependencies": {
+    "@testing-library/dom": "^8.14.0",
     "@types/react-beautiful-dnd": "^13.1.2",
     "@types/styled-components": "^5.1.25",
-    "@types/uuid": "^8.3.4"
+    "@types/uuid": "^8.3.4",
+    "babel-jest": "^28.1.1",
+    "jest": "^28.1.1",
+    "jest-dom": "^4.0.0"
   }
 }
