@@ -5,7 +5,7 @@ const darkTheme = {
     primary: '#EB622F',
     feature: '#F47E52',
     bug: '#DB4B4B',
-    deploy: '#71E567',
+    deploy: '#61D856',
     infra: '#131FC2',
     refactor: '#7352CF',
     text_primary: '#BBBBBB',

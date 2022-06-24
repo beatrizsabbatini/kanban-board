@@ -5,7 +5,7 @@ const lightTheme = {
     primary: '#EB622F',
     feature: '#F47E52',
     bug: '#DB4B4B',
-    deploy: '#71E567',
+    deploy: '#61D856',
     refactor: '#7352CF',
     infra: '#131FC2',
     text_primary: '#656565',
