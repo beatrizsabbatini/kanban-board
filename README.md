@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Kanban Board Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Layout](https://github.com/beatrizsabbatini/kanban-board/blob/main/src/assets/project_video.gif "Kanban Board")
 
 ## Available Scripts
 
