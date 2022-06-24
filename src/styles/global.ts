@@ -12,6 +12,7 @@ export default createGlobalStyle`
     background: ${({theme}) => theme.colors.background};
     color: ${({theme}) => theme.colors.text_primary};
     font-size: 14px;
+    overflow-y: hidden;
   }
 
   h1 {
@@ -36,5 +37,27 @@ export default createGlobalStyle`
   p {
     color: ${({ theme }) => theme.colors.text_tertiary};
   }
- 
+
+    /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.colors.scrollbar_background};
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.colors.scrollbar_thumb};
+    border-radius: 5px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.colors.scrollbar_thumb_hover};
+  }
+
 `
