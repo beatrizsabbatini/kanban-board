@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.js": "/kanban-board/static/js/main.0a9480ad.js",
+    "static/media/moon.png": "/kanban-board/static/media/moon.b0d7c838a5eb7ee85998.png",
+    "static/media/sun.png": "/kanban-board/static/media/sun.d07c9ecea0ad9094855a.png",
+    "static/media/search.png": "/kanban-board/static/media/search.8bab5def29c60fbee169.png",
+    "static/media/close.png": "/kanban-board/static/media/close.e26b5476fca5db046bb5.png",
+    "index.html": "/kanban-board/index.html",
+    "main.0a9480ad.js.map": "/kanban-board/static/js/main.0a9480ad.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.0a9480ad.js"
+  ]
+}
