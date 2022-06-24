@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { SCREEN_BREAKPOINTS } from "../../constants/breakpoints";
 
 interface LabelContainerProps {
   color: any;
@@ -18,7 +19,7 @@ export const Container = styled.div`
 
 export const ModalContent = styled.div`
   padding: 3rem;
-  height: 400px;
+  min-height: 400px;
   width: 600px;
   background-color: ${({theme}) => theme.colors.components_background};
   border-radius: 5px;
@@ -31,6 +32,16 @@ export const ModalContent = styled.div`
     right: 2rem;
     top: 2rem;
     cursor: pointer;
+  }
+
+  @media(max-width: ${SCREEN_BREAKPOINTS.SMALL}px) {
+    padding: 2rem;
+    width: 80VW;
+
+    img{
+      right: 1rem;
+      top: 1rem;
+    }
   }
 `
 
@@ -53,8 +64,13 @@ export const MultilineInput = styled.textarea`
 export const CategoriesContainer = styled.div`
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  gap: 1rem;
+
+  @media(max-width: ${SCREEN_BREAKPOINTS.SMALL}px) {
+    gap: 10px;
+  }
 `
 
 export const Button = styled.button`
@@ -72,11 +88,14 @@ export const Button = styled.button`
 export const LabelContainer = styled.div<LabelContainerProps>`
   padding: 5px;
   background-color: ${({color}) => color};
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content:space-between ;
   border-radius: 5px;
+
+  label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between ;
+  }
 
   i{
     font-style: normal;

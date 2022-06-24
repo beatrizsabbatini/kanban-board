@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 
 import CloseIcon from '../../assets/close.png';
 import getCategoryBackgroundColor from '../../helpers/getCategoryBackgroundColor';
 import { useModal } from '../../hooks/useModal';
 import { useAppDispatch } from '../../hooks/useRedux';
 import ICategory from '../../interfaces/ICategory';
-import { updateOneCard } from '../../store/slices/cards.slice';
+import IStatus from '../../interfaces/IStatus';
+import { addCard, updateOneCard , } from '../../store/slices/cards.slice';
+import { updateColumns } from '../../store/slices/columns.slice';
 import { 
   Container, 
   Input, 
@@ -38,6 +41,22 @@ const Modal: React.FC<ModalProps> = ({visible}) => {
   }, [selectedCard])
 
   const handleSave = () => {
+
+    if(!selectedCard?.id){
+      const newCard = {
+        id: uuidv4(),
+        title,
+        description,
+        category: cardCategory,
+        status: IStatus.BACKLOG,
+        hidden: false,
+      }
+      dispatch(addCard(newCard))
+      dispatch(updateColumns(newCard.id))
+      toggleVisibility(undefined);
+
+    }
+
     const newCard = {
       ...selectedCard,
       title,
@@ -62,10 +81,7 @@ const Modal: React.FC<ModalProps> = ({visible}) => {
         <MultilineInput aria-multiline value={description} onChange={(e) => setDescription(e.target.value)}/>
         <CategoriesContainer>
           {Object.values(ICategory).map(category => (
-            <LabelContainer 
-              color={() => getCategoryBackgroundColor(theme, category)}
-             
-            >
+            <LabelContainer color={() => getCategoryBackgroundColor(theme, category)}>
               <label>
                 <input 
                   type='radio' 

@@ -11,6 +11,7 @@ export const Container = styled.div`
   min-height: 100vh;
   width: 100%;
   padding: 5rem 0 5rem 0;
+  position: relative;
 
   @media(max-width: ${SCREEN_BREAKPOINTS.EXTRA_LARGE}px) {
     padding: 2rem 0 2rem 0;
@@ -29,6 +30,10 @@ export const StatusesColumnsContainer = styled.div`
   flex-direction: row;
   align-items: flex-start;
   gap: 1.5rem;
+  max-width: 100vw;
+  overflow-x: auto;
+
+
 `
 
 export const Header = styled.div`
@@ -87,5 +92,9 @@ export const TitleAndSwitch = styled.div`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+
+    h1{
+      padding-bottom: 0;
+    }
   }
 `

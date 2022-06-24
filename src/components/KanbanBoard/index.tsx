@@ -9,16 +9,17 @@ import SunIcon from '../../assets/sun.png';
 import ICard from '../../interfaces/ICard';
 import IStatus from '../../interfaces/IStatus';
 import IColumn from '../../interfaces/IColumn';
+import ICategory from '../../interfaces/ICategory';
 import Column from '../Column';
 import Modal from '../Modal';
+import SearchInput from '../SearchInput';
+import getCategoryBackgroundColor from '../../helpers/getCategoryBackgroundColor';
 import { useModal } from '../../hooks/useModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { Container, FiltersContainer, Header, LabelContainer, SearchAndFilters, StatusesColumnsContainer, SwitchIcon, TitleAndSwitch } from './styles';
 import { setColumns } from '../../store/slices/columns.slice';
 import { filterCards, setCards } from '../../store/slices/cards.slice';
-import SearchInput from '../SearchInput';
-import ICategory from '../../interfaces/ICategory';
-import getCategoryBackgroundColor from '../../helpers/getCategoryBackgroundColor';
+import { ButtonAddCard } from '../ButtonAddCard';
 
 interface KanbanBoardProps {
   toggleTheme: () => void;
@@ -173,27 +174,28 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
           
         </Header>
         
-          <StatusesColumnsContainer>
-            <DragDropContext onDragEnd={onDragEnd}>
-              {columns.map((column, index) => {
+        <StatusesColumnsContainer>
+          <DragDropContext onDragEnd={onDragEnd}>
+            {columns.map((column, index) => {
 
-                const cardsArray: ICard[] = [];
+              const cardsArray: ICard[] = [];
 
-                column.cardsIds.forEach(cardId => {
-                  const foundedCard = cards.find(card => card.id === cardId);
-                  if (foundedCard) cardsArray.push(foundedCard);
-                })
-              
-                return (
-                  <Column 
-                    key={column.id} 
-                    index={index}
-                    status={column.id} 
-                    cards={cardsArray}
-                  />
-              )})}
-            </DragDropContext>
+              column.cardsIds.forEach(cardId => {
+                const foundedCard = cards.find(card => card.id === cardId);
+                if (foundedCard) cardsArray.push(foundedCard);
+              })
+            
+              return (
+                <Column 
+                  key={column.id} 
+                  index={index}
+                  status={column.id} 
+                  cards={cardsArray}
+                />
+            )})}
+          </DragDropContext>
         </StatusesColumnsContainer>
+        <ButtonAddCard/>
       </Container>
       <Modal visible={visible}/>
     </>

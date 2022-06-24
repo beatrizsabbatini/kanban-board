@@ -19,6 +19,11 @@ export const cardsSlice = createSlice({
     setCards: (state, action) => {
       state.cards = action.payload
     },
+    addCard: (state, action) => {
+      const card = action.payload
+
+      state.cards = [...state.cards, card]
+    },
     updateOneCard: (state, action) => {
       const cardId = action.payload.id;
 
@@ -62,6 +67,6 @@ export const cardsSlice = createSlice({
   }
 })
 
-export const { setCards, updateOneCard, filterCards, clearFilters } = cardsSlice.actions;
+export const { setCards, updateOneCard, filterCards, clearFilters, addCard } = cardsSlice.actions;
 
 export default cardsSlice.reducer;

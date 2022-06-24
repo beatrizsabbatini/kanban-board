@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import { SCREEN_BREAKPOINTS } from '../constants/breakpoints'
 
 export default createGlobalStyle`
   * {
@@ -12,7 +13,7 @@ export default createGlobalStyle`
     background: ${({theme}) => theme.colors.background};
     color: ${({theme}) => theme.colors.text_primary};
     font-size: 14px;
-    overflow-y: hidden;
+    overflow-y: auto;
   }
 
   h1 {
@@ -23,6 +24,11 @@ export default createGlobalStyle`
 
     span{
       color: ${({ theme }) => theme.colors.primary};
+    }
+
+    @media(max-width: ${SCREEN_BREAKPOINTS.MEDIUM}px) {
+      font-size: 2.5rem;
+      line-height: 2.5rem;
     }
   }
 
