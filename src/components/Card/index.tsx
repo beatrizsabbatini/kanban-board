@@ -4,6 +4,7 @@ import { Draggable } from 'react-beautiful-dnd';
 import { ThemeContext } from 'styled-components';
 
 import getCategoryBackgroundColor from '../../helpers/getCategoryBackgroundColor';
+import { useModal } from '../../hooks/useModal';
 import ICard from '../../interfaces/ICard';
 import Badge from '../Badge';
 
@@ -19,6 +20,8 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
 
   const [backgroundColor, setBackgroundColor] = useState<string>(theme.colors.primary);
 
+  const { toggleVisibility } = useModal();
+
   useEffect(() => {
     if (card) {
       const categoryColor = getCategoryBackgroundColor(theme, card.category);
@@ -29,7 +32,12 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
   return (
     <Draggable draggableId={card.id} index={index}>
       {provided => (
-        <CardContainer ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
+        <CardContainer 
+          onClick={() => toggleVisibility(card)} 
+          ref={provided.innerRef} 
+          {...provided.draggableProps} 
+          {...provided.dragHandleProps}
+        >
           <CardBorder color={backgroundColor}/> 
           <h3>{card.title}</h3>
           <CardBottom>

@@ -21,8 +21,6 @@ export const CardContainer = styled.div`
 
   position: relative;
 
-  cursor: pointer;
-
   h3 {
     text-overflow: ellipsis;
     width: 100%;
@@ -62,4 +60,8 @@ export const CardBottom = styled.div`
   align-items: center;
   justify-content: space-between ;
   width: 100%;
+
+  p {
+    cursor: pointer !important;
+  }
 `

@@ -13,6 +13,8 @@ import ICard from '../../interfaces/ICard';
 import IStatus from '../../interfaces/IStatus';
 import mockColumns from '../../data/columns';
 import IColumn from '../../interfaces/IColumn';
+import Modal from '../Modal';
+import { useModal } from '../../hooks/useModal';
 
 interface KanbanBoardProps {
   toggleTheme: () => void;
@@ -20,8 +22,11 @@ interface KanbanBoardProps {
 
 const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
   const { colors, title } = useContext(ThemeContext);
-  const [cards, setCards] = useState(mockCards);
-  const [columns, setColumns] = useState(mockColumns);
+
+  const [cards, setCards] = useState<ICard[]>(mockCards);
+  const [columns, setColumns] = useState<IColumn[]>(mockColumns);
+  
+  const { visible } = useModal();
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
@@ -101,37 +106,40 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
   }
   
   return (
-    <Container>
-      <h1>Kanban <span>Board</span></h1>
-      <Switch
-        onChange={toggleTheme}
-        checked={title === 'light'}
-        checkedIcon={<SwitchIcon src={SunIcon} alt="Sun"/>} 
-        uncheckedIcon={<SwitchIcon src={MoonIcon} alt="Moon"/>} 
-        onColor={colors.primary}
-        offColor={colors.switch}
-      />
-        <StatusesColumnsContainer>
-          <DragDropContext onDragEnd={onDragEnd}>
-            {columns.map(column => {
+    <>
+      <Container>
+        <h1>Kanban <span>Board</span></h1>
+        <Switch
+          onChange={toggleTheme}
+          checked={title === 'light'}
+          checkedIcon={<SwitchIcon src={SunIcon} alt="Sun"/>} 
+          uncheckedIcon={<SwitchIcon src={MoonIcon} alt="Moon"/>} 
+          onColor={colors.primary}
+          offColor={colors.switch}
+        />
+          <StatusesColumnsContainer>
+            <DragDropContext onDragEnd={onDragEnd}>
+              {columns.map(column => {
 
-              const cardsArray: ICard[] = [];
+                const cardsArray: ICard[] = [];
 
-              column.cardsIds.forEach(cardId => {
-                const foundedCard = cards.find(card => card.id === cardId);
-                if (foundedCard) cardsArray.push(foundedCard);
-              })
-            
-              return (
-                <Column 
-                  key={column.id} 
-                  status={column.id} 
-                  cards={cardsArray}
-                />
-            )})}
-          </DragDropContext>
-      </StatusesColumnsContainer>
-    </Container>
+                column.cardsIds.forEach(cardId => {
+                  const foundedCard = cards.find(card => card.id === cardId);
+                  if (foundedCard) cardsArray.push(foundedCard);
+                })
+              
+                return (
+                  <Column 
+                    key={column.id} 
+                    status={column.id} 
+                    cards={cardsArray}
+                  />
+              )})}
+            </DragDropContext>
+        </StatusesColumnsContainer>
+      </Container>
+      <Modal visible={visible}/>
+    </>
   )
 }
 

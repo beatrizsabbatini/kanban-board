@@ -4,4 +4,6 @@ export const Container = styled.div`
   width: 300px;
 `
 
-export const CardsList = styled.div``;
+export const CardsList = styled.div`
+  height: 60vh;
+`;
