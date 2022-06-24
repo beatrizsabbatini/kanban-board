@@ -1,9 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { ThemeContext } from 'styled-components';
 
 import CloseIcon from '../../assets/close.png';
+import getCategoryBackgroundColor from '../../helpers/getCategoryBackgroundColor';
 import { useModal } from '../../hooks/useModal';
+import { useAppDispatch } from '../../hooks/useRedux';
 import ICategory from '../../interfaces/ICategory';
-import { CategoriesContainer, Container, Input, ModalContent, MultilineInput } from './styles';
+import { updateOneCard } from '../../store/slices/cards.slice';
+import { 
+  Container, 
+  Input, 
+  Button,
+  ModalContent, 
+  MultilineInput, 
+  CategoriesContainer, 
+  LabelContainer
+} from './styles';
 
 interface ModalProps{
   visible: boolean;
@@ -11,16 +23,31 @@ interface ModalProps{
 
 const Modal: React.FC<ModalProps> = ({visible}) => {
   const { toggleVisibility, selectedCard } = useModal();
+  const theme = useContext(ThemeContext); 
 
   const [title, setTitle] = useState<string | undefined>(selectedCard?.title);
   const [description, setDescription] = useState<string | undefined>(selectedCard?.description);
   const [cardCategory, setCardCategory] = useState<ICategory | undefined>(selectedCard?.category);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setTitle(selectedCard?.title);
     setDescription(selectedCard?.description);
     setCardCategory(selectedCard?.category);
   }, [selectedCard])
+
+  const handleSave = () => {
+    const newCard = {
+      ...selectedCard,
+      title,
+      description,
+      category: cardCategory
+    }
+    dispatch(updateOneCard(newCard))
+
+    toggleVisibility(undefined);
+  }
   
 
   if (!visible) return null;
@@ -35,7 +62,7 @@ const Modal: React.FC<ModalProps> = ({visible}) => {
         <MultilineInput aria-multiline value={description} onChange={(e) => setDescription(e.target.value)}/>
         <CategoriesContainer>
           {Object.values(ICategory).map(category => (
-            <div>
+            <LabelContainer color={() => getCategoryBackgroundColor(theme, category)}>
               <input 
                 type='radio' 
                 name={category} 
@@ -44,9 +71,10 @@ const Modal: React.FC<ModalProps> = ({visible}) => {
                 onChange={(e) => setCardCategory(e.currentTarget.value as ICategory)}
               />
               <label>{category}</label>
-            </div>
+            </LabelContainer>
           ))}
         </CategoriesContainer>
+        <Button type='button' onClick={handleSave}>Save Changes</Button>
       </ModalContent>
     </Container>
   )

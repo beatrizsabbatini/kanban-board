@@ -13,9 +13,10 @@ import Column from '../Column';
 import Modal from '../Modal';
 import { useModal } from '../../hooks/useModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { Container, StatusesColumnsContainer, SwitchIcon } from './styles';
+import { Container, Header, StatusesColumnsContainer, SwitchIcon } from './styles';
 import { setColumns } from '../../store/slices/columns.slice';
 import { setCards } from '../../store/slices/cards.slice';
+import SearchInput from '../SearchInput';
 
 interface KanbanBoardProps {
   toggleTheme: () => void;
@@ -25,11 +26,10 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
   const { colors, title } = useContext(ThemeContext);
   const { cards } = useAppSelector((state => state.cards));
   const { columns } = useAppSelector((state => state.columns));
+  const { visible } = useModal();
 
   const dispatch = useAppDispatch();
   
-  const { visible } = useModal();
-
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
 
@@ -110,15 +110,21 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
   return (
     <>
       <Container>
-        <h1>Kanban <span>Board</span></h1>
-        <Switch
-          onChange={toggleTheme}
-          checked={title === 'light'}
-          checkedIcon={<SwitchIcon src={SunIcon} alt="Sun"/>} 
-          uncheckedIcon={<SwitchIcon src={MoonIcon} alt="Moon"/>} 
-          onColor={colors.primary}
-          offColor={colors.switch}
-        />
+        <Header>
+          <div>
+            <h1>Kanban <span>Board</span></h1>
+            <Switch
+              onChange={toggleTheme}
+              checked={title === 'light'}
+              checkedIcon={<SwitchIcon src={SunIcon} alt="Sun"/>} 
+              uncheckedIcon={<SwitchIcon src={MoonIcon} alt="Moon"/>} 
+              onColor={colors.primary}
+              offColor={colors.switch}
+            />
+          </div>
+          <SearchInput/>
+        </Header>
+        
           <StatusesColumnsContainer>
             <DragDropContext onDragEnd={onDragEnd}>
               {columns.map(column => {

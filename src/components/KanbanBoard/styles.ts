@@ -21,3 +21,11 @@ export const StatusesColumnsContainer = styled.div`
   align-items: flex-start;
   justify-content: space-between;
 `
+
+export const Header = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`
