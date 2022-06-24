@@ -10,11 +10,12 @@ import { CardsList, Container } from './styles';
 interface ColumnProps {
   status: IStatus;
   cards: ICard[];
+  index: number;
 }
 
-const Column: React.FC<ColumnProps> = ({ status, cards }) => {
+const Column: React.FC<ColumnProps> = ({ status, cards, index }) => {
   return (
-    <Container>
+    <Container isFirstColumn={index === 0}>
       <h2>{status}</h2>
       <Droppable droppableId={status}>
         {(provided) => (

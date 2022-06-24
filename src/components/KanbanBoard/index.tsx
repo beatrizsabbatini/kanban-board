@@ -13,7 +13,7 @@ import Column from '../Column';
 import Modal from '../Modal';
 import { useModal } from '../../hooks/useModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { Container, FiltersContainer, Header, LabelContainer, StatusesColumnsContainer, SwitchIcon } from './styles';
+import { Container, FiltersContainer, Header, LabelContainer, SearchAndFilters, StatusesColumnsContainer, SwitchIcon, TitleAndSwitch } from './styles';
 import { setColumns } from '../../store/slices/columns.slice';
 import { filterCards, setCards } from '../../store/slices/cards.slice';
 import SearchInput from '../SearchInput';
@@ -139,7 +139,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
     <>
       <Container>
         <Header>
-          <div>
+          <TitleAndSwitch>
             <h1>Kanban <span>Board</span></h1>
             <Switch
               onChange={toggleTheme}
@@ -149,8 +149,8 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
               onColor={colors.primary}
               offColor={colors.switch}
             />
-          </div>
-          <div>
+          </TitleAndSwitch>
+          <SearchAndFilters>
             <SearchInput/>
             <FiltersContainer>
               {Object.values(ICategory).map(category => (
@@ -166,18 +166,17 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
                 </LabelContainer>
               ))}
           </FiltersContainer>
-          </div>
+          </SearchAndFilters>
           
         </Header>
         
           <StatusesColumnsContainer>
             <DragDropContext onDragEnd={onDragEnd}>
-              {columns.map(column => {
+              {columns.map((column, index) => {
 
                 const cardsArray: ICard[] = [];
 
                 column.cardsIds.forEach(cardId => {
-                  // const displayCards = filteredCards ? filteredCards : cards;
                   const foundedCard = cards.find(card => card.id === cardId);
                   if (foundedCard) cardsArray.push(foundedCard);
                 })
@@ -185,6 +184,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
                 return (
                   <Column 
                     key={column.id} 
+                    index={index}
                     status={column.id} 
                     cards={cardsArray}
                   />

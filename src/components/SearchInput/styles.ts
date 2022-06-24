@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SCREEN_BREAKPOINTS } from '../../constants/breakpoints';
 
 export const Container = styled.div`
   width: 40vw;
@@ -10,8 +11,13 @@ export const Container = styled.div`
   justify-content: space-between;
   border-radius: 5px;
   -webkit-box-shadow: 2px 5px 10px 2px rgba(0,0,0,0.11); 
-box-shadow: 2px 5px 10px 2px rgba(0,0,0,0.11);
+  box-shadow: 2px 5px 10px 2px rgba(0,0,0,0.11);
   border: 1px solid ${({theme}) => theme.colors.border};
+
+  @media(max-width: ${SCREEN_BREAKPOINTS.EXTRA_LARGE}px) {
+    margin-top: 2rem;
+    width: 100%;
+  }
 
   input{
     width: calc(100% - 1rem - 20px);
