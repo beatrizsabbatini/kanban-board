@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import Switch from 'react-switch';
 import { ThemeContext } from 'styled-components';
@@ -13,10 +13,12 @@ import Column from '../Column';
 import Modal from '../Modal';
 import { useModal } from '../../hooks/useModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
-import { Container, Header, StatusesColumnsContainer, SwitchIcon } from './styles';
+import { Container, FiltersContainer, Header, LabelContainer, StatusesColumnsContainer, SwitchIcon } from './styles';
 import { setColumns } from '../../store/slices/columns.slice';
 import { setCards } from '../../store/slices/cards.slice';
 import SearchInput from '../SearchInput';
+import ICategory from '../../interfaces/ICategory';
+import getCategoryBackgroundColor from '../../helpers/getCategoryBackgroundColor';
 
 interface KanbanBoardProps {
   toggleTheme: () => void;
@@ -24,9 +26,13 @@ interface KanbanBoardProps {
 
 const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
   const { colors, title } = useContext(ThemeContext);
+  const theme = useContext(ThemeContext); 
+
   const { cards, filteredCards } = useAppSelector((state => state.cards));
   const { columns } = useAppSelector((state => state.columns));
   const { visible } = useModal();
+
+  const [selectedCategories, setSelectedCategories] = useState<ICategory[]>([]);
 
   const dispatch = useAppDispatch();
   
@@ -122,7 +128,23 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
               offColor={colors.switch}
             />
           </div>
-          <SearchInput/>
+          <div>
+            <SearchInput/>
+            <FiltersContainer>
+              {Object.values(ICategory).map(category => (
+                <LabelContainer color={() => getCategoryBackgroundColor(theme, category)}>
+                  <input 
+                    type='checkbox' 
+                    multiple
+                    name={category} 
+                    value={category} 
+                  />
+                  <label>{category}</label>
+                </LabelContainer>
+              ))}
+          </FiltersContainer>
+          </div>
+          
         </Header>
         
           <StatusesColumnsContainer>

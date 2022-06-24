@@ -16,6 +16,7 @@ export default createGlobalStyle`
 
   h1 {
     font-size: 3rem;
+    line-height: 3rem;
     padding-bottom: 1rem;
     color: ${({ theme }) => theme.colors.text_secondary};
 
