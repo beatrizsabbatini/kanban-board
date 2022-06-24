@@ -5,6 +5,7 @@ import { ThemeContext } from 'styled-components';
 
 import getCategoryBackgroundColor from '../../helpers/getCategoryBackgroundColor';
 import { useModal } from '../../hooks/useModal';
+import { useAppSelector } from '../../hooks/useRedux';
 import ICard from '../../interfaces/ICard';
 import Badge from '../Badge';
 

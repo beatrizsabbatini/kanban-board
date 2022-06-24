@@ -1,20 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 
 import Switch from 'react-switch';
 import { ThemeContext } from 'styled-components';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 
-import { Container, StatusesColumnsContainer, SwitchIcon } from './styles';
 import MoonIcon from '../../assets/moon.png';
 import SunIcon from '../../assets/sun.png';
-import Column from '../Column';
-import mockCards from '../../data/cards';
 import ICard from '../../interfaces/ICard';
 import IStatus from '../../interfaces/IStatus';
-import mockColumns from '../../data/columns';
 import IColumn from '../../interfaces/IColumn';
+import Column from '../Column';
 import Modal from '../Modal';
 import { useModal } from '../../hooks/useModal';
+import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
+import { Container, StatusesColumnsContainer, SwitchIcon } from './styles';
+import { setColumns } from '../../store/slices/columns.slice';
+import { setCards } from '../../store/slices/cards.slice';
 
 interface KanbanBoardProps {
   toggleTheme: () => void;
@@ -22,9 +23,10 @@ interface KanbanBoardProps {
 
 const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
   const { colors, title } = useContext(ThemeContext);
+  const { cards } = useAppSelector((state => state.cards));
+  const { columns } = useAppSelector((state => state.columns));
 
-  const [cards, setCards] = useState<ICard[]>(mockCards);
-  const [columns, setColumns] = useState<IColumn[]>(mockColumns);
+  const dispatch = useAppDispatch();
   
   const { visible } = useModal();
 
@@ -56,7 +58,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
     //Moving cards in the same column
     if (sourceColumn === destinationColumn) {
 
-      const newColumnCardsIds = destinationColumn.cardsIds;
+      const newColumnCardsIds = [...destinationColumn.cardsIds];
 
       newColumnCardsIds.splice(source.index, 1);
       newColumnCardsIds.splice(destination.index, 0, draggableId);
@@ -71,14 +73,14 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
         else return column;
       }) ;
   
-      setColumns(updatedColumns)
-      setCards(updatedCards);
+      dispatch(setColumns(updatedColumns))
+      dispatch(setCards(updatedCards))
 
       return
     }
 
     //Moving cards from one column to another
-    const sourceCardsIds = sourceColumn.cardsIds;
+    const sourceCardsIds = [...sourceColumn.cardsIds];
     sourceCardsIds.splice(source.index, 1);
 
     const newSourceColumn: IColumn = {
@@ -86,7 +88,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
       cardsIds: sourceCardsIds
     }
 
-    const destinationCardsIds = destinationColumn.cardsIds;
+    const destinationCardsIds = [...destinationColumn.cardsIds];
     destinationCardsIds.splice(destination.index, 0, draggableId);
 
     const newDestinationColumn: IColumn = {
@@ -100,8 +102,8 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
       else return column;
     }) ;
 
-    setColumns(updatedColumns)
-    setCards(updatedCards);
+    dispatch(setColumns(updatedColumns))
+    dispatch(setCards(updatedCards))
 
   }
   
