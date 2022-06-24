@@ -2,7 +2,7 @@
 
 ![Layout](https://github.com/beatrizsabbatini/kanban-board/blob/main/src/assets/project_video.gif "Kanban Board")
 
-See the published web app: https://github.com/beatrizsabbatini/kanban-board
+See the published web app: https://beatrizsabbatini.github.io/kanban-board/
 
 ## Available Scripts
 
@@ -28,4 +28,4 @@ Your app is ready to be deployed!
 
 Deploys the code from the branch gh-pages to the published url:
 
-### `https://github.com/beatrizsabbatini/kanban-board` 
+### `https://beatrizsabbatini.github.io/kanban-board/` 
