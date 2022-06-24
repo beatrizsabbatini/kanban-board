@@ -24,6 +24,41 @@ const mockCards: ICard[] = [
     description: '',
     status: IStatus.BACKLOG
   },
+  {
+    id: 'card-4',
+    category: ICategory.DEPLOY,
+    title: 'Send first deploy to prod',
+    description: '',
+    status: IStatus.BACKLOG
+  },
+  {
+    id: 'card-5',
+    category: ICategory.FEATURE,
+    title: 'Create landing page',
+    description: '',
+    status: IStatus.DONE
+  },
+  {
+    id: 'card-6',
+    category: ICategory.REFACTOR,
+    title: 'Make the onDragEnd function more efficient',
+    description: '',
+    status: IStatus.TO_DO
+  },
+  {
+    id: 'card-7',
+    category: ICategory.DEPLOY,
+    title: 'Send first deploy to develop environment',
+    description: '',
+    status: IStatus.DONE
+  },
+  {
+    id: 'card-8',
+    category: ICategory.FEATURE,
+    title: 'Create light and dark theme switch',
+    description: '',
+    status: IStatus.IN_REVIEW
+  },
 ]
 
 export default mockCards;

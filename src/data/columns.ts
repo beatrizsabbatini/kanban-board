@@ -5,12 +5,12 @@ const mockColumns: IColumn[] = [
   {
     id: IStatus.BACKLOG,
     title: 'Backlog',
-    cardsIds: ['card-2', 'card-3']
+    cardsIds: ['card-2', 'card-3', 'card-4']
   },
   {
     id: IStatus.TO_DO,
     title: 'To Do',
-    cardsIds: []
+    cardsIds: ['card-6']
   },
   {
     id: IStatus.DOING,
@@ -20,12 +20,12 @@ const mockColumns: IColumn[] = [
   {
     id: IStatus.IN_REVIEW,
     title: 'In Review',
-    cardsIds: []
+    cardsIds: ['card-8']
   },
   {
     id: IStatus.DONE,
     title: 'Done',
-    cardsIds: []
+    cardsIds: ['card-7', 'card-5']
   }
 ]
 
