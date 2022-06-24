@@ -2,6 +2,8 @@
 
 ![Layout](https://github.com/beatrizsabbatini/kanban-board/blob/main/src/assets/project_video.gif "Kanban Board")
 
+See the published web app: https://github.com/beatrizsabbatini/kanban-board
+
 ## Available Scripts
 
 In the project directory, you can run:
@@ -22,4 +24,8 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### `yarn run deploy`
+
+Deploys the code from the branch gh-pages to the published url:
+
+### `https://github.com/beatrizsabbatini/kanban-board` 
