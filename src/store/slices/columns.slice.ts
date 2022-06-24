@@ -4,11 +4,13 @@ import mockColumns from "../../data/columns";
 import IColumn from "../../interfaces/IColumn";
 
 interface ColumnsSliceState {
-  columns: IColumn[]
+  columns: IColumn[],
+  updatedColumns: IColumn[] | undefined
 }
 
 const initialState: ColumnsSliceState = {
   columns: mockColumns,
+  updatedColumns: undefined
 }
 
 export const columnsSlice = createSlice({

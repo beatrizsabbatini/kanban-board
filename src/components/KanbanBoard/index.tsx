@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Switch from 'react-switch';
 import { ThemeContext } from 'styled-components';
@@ -15,7 +15,7 @@ import { useModal } from '../../hooks/useModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
 import { Container, FiltersContainer, Header, LabelContainer, StatusesColumnsContainer, SwitchIcon } from './styles';
 import { setColumns } from '../../store/slices/columns.slice';
-import { setCards } from '../../store/slices/cards.slice';
+import { filterCards, setCards } from '../../store/slices/cards.slice';
 import SearchInput from '../SearchInput';
 import ICategory from '../../interfaces/ICategory';
 import getCategoryBackgroundColor from '../../helpers/getCategoryBackgroundColor';
@@ -28,16 +28,18 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
   const { colors, title } = useContext(ThemeContext);
   const theme = useContext(ThemeContext); 
 
-  const { cards, filteredCards } = useAppSelector((state => state.cards));
+  const { cards } = useAppSelector((state => state.cards));
   const { columns } = useAppSelector((state => state.columns));
   const { visible } = useModal();
 
-  const [selectedCategories, setSelectedCategories] = useState<ICategory[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<ICategory[]>(Object.values(ICategory));
 
   const dispatch = useAppDispatch();
   
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
+
+    console.log("destination: ", destination)
 
     if (!destination) return;
 
@@ -108,10 +110,30 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
       else return column;
     }) ;
 
+    console.log("newDestinationColumn: ", newDestinationColumn)
+    console.log("updatedColumns: ", updatedColumns)
+
     dispatch(setColumns(updatedColumns))
     dispatch(setCards(updatedCards))
 
   }
+
+  const handleChangeCheckbox = (category: ICategory) => {
+    const foundCategory = selectedCategories.find(item => item === category);
+
+    if (foundCategory){
+      const categoriesWithItemRemoved = selectedCategories.filter(item => item !== category);
+      setSelectedCategories(categoriesWithItemRemoved);
+      return
+    }
+
+    setSelectedCategories([...selectedCategories, category])
+  }
+
+  useEffect(() => {
+    dispatch(filterCards({categories: selectedCategories}))
+  }, [selectedCategories])
+  
   
   return (
     <>
@@ -130,19 +152,20 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
           </div>
           <div>
             <SearchInput/>
-            <FiltersContainer>
+            {/* <FiltersContainer>
               {Object.values(ICategory).map(category => (
                 <LabelContainer color={() => getCategoryBackgroundColor(theme, category)}>
                   <input 
                     type='checkbox' 
-                    multiple
                     name={category} 
-                    value={category} 
+                    value={category}
+                    checked={selectedCategories.includes(category)} 
+                    onChange={() => handleChangeCheckbox(category)}
                   />
                   <label>{category}</label>
                 </LabelContainer>
               ))}
-          </FiltersContainer>
+          </FiltersContainer> */}
           </div>
           
         </Header>
@@ -154,8 +177,8 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
                 const cardsArray: ICard[] = [];
 
                 column.cardsIds.forEach(cardId => {
-                  const displayCards = filteredCards ? filteredCards : cards;
-                  const foundedCard = displayCards.find(card => card.id === cardId);
+                  // const displayCards = filteredCards ? filteredCards : cards;
+                  const foundedCard = cards.find(card => card.id === cardId);
                   if (foundedCard) cardsArray.push(foundedCard);
                 })
               

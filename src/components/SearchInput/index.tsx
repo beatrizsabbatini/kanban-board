@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import SearchIcon from '../../assets/search.png'
 import { useAppDispatch } from '../../hooks/useRedux';
-import { filterCards } from '../../store/slices/cards.slice';
+import { clearFilters, filterCards } from '../../store/slices/cards.slice';
 import { Container } from './styles';
 
 const SearchInput: React.FC = () => {
@@ -11,7 +11,12 @@ const SearchInput: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(filterCards(searchText))
+    if (searchText.length === 0) {
+      dispatch(clearFilters());
+      return;
+    } else {
+      dispatch(filterCards({searchText}))
+    }
   }, [searchText])
   
   return (

@@ -2,15 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import mockCards from "../../data/cards";
 import ICard from "../../interfaces/ICard";
+import ICategory from "../../interfaces/ICategory";
 
 interface CardsSliceState {
   cards: ICard[],
-  filteredCards: ICard[] | undefined
 }
 
 const initialState: CardsSliceState = {
   cards: mockCards,
-  filteredCards: undefined
 }
 
 export const cardsSlice = createSlice({
@@ -31,17 +30,36 @@ export const cardsSlice = createSlice({
       state.cards = updatedCards;
     },
     filterCards: (state, action) => {
-      const searchText = action.payload;
+      const searchText = action.payload.searchText || '';
+      const categories = action.payload.categories || Object.values(ICategory);
 
       const filteredCards = [...state.cards]
-      .filter(card => card.title.toUpperCase()
-      .includes(searchText.toUpperCase()));
+        .map(card => {
+            if (searchText.length > 0){
+              if (card.title.toUpperCase()
+                .includes(searchText.toUpperCase()) && categories
+                .includes(card.category)
+                ) return card
+            } else {
+              if (categories.includes(card.category)) return card
+            }
+            return {...card, hidden: true}
+          }
+        );
 
-      state.filteredCards = filteredCards;
+      state.cards = filteredCards;
+    },
+    clearFilters: (state) => {
+      const clearedFiltersCards = state.cards.map(card => ({
+        ...card,
+        hidden: false
+      }))
+
+      state.cards = clearedFiltersCards;
     }
   }
 })
 
-export const { setCards, updateOneCard, filterCards } = cardsSlice.actions;
+export const { setCards, updateOneCard, filterCards, clearFilters } = cardsSlice.actions;
 
 export default cardsSlice.reducer;

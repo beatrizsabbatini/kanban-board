@@ -6,7 +6,8 @@ interface ICard {
   category: ICategory,
   title: string,
   description: string,
-  status: IStatus
+  status: IStatus,
+  hidden: boolean
 }
 
 export default ICard;

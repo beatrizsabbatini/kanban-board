@@ -35,6 +35,7 @@ const Card: React.FC<CardProps> = ({ card, index }) => {
       {provided => (
         <CardContainer 
           onClick={() => toggleVisibility(card)} 
+          hideCard={card.hidden}
           ref={provided.innerRef} 
           {...provided.draggableProps} 
           {...provided.dragHandleProps}
