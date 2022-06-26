@@ -4,25 +4,35 @@
 
 See the published web app: https://beatrizsabbatini.github.io/kanban-board/
 
-## Available Scripts
+## How to run this project on your computer:
 
-In the project directory, you can run:
+First, we need to install the dependencies. You can either use yarn, or npm for this.
+
+### `yarn`
+
+or
+
+### `npm install`
+
+Now, for running the project if you installed the dependencies using yarn:
 
 ### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+or, if you used npm:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `npm start`
+
+That´s it! The project will automatically open up in your default browser, using the url: 
+
+### `http://localhost:3000`
+
+
+## Scripts that I used to build and deploy:
 
 ### `yarn build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
 ### `yarn run deploy`
 
