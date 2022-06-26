@@ -5,6 +5,10 @@ interface LabelContainerProps {
   color: any;
 }
 
+interface ErrorProps {
+  containsError?: boolean
+}
+
 export const Container = styled.div`
   position: fixed;
   left: 0;
@@ -45,18 +49,18 @@ export const ModalContent = styled.div`
   }
 `
 
-export const Input = styled.input`
+export const Input = styled.input<ErrorProps>`
   width: 100%;
   height: 2rem;
-  margin: 0.5rem 0 2rem 0;
+  margin: 0.5rem 0 ${({ containsError }) => containsError ? 0 : '2rem'} 0;
   border-radius: 5px;
   padding: 0.3rem;
 `
 
-export const MultilineInput = styled.textarea`
+export const MultilineInput = styled.textarea<ErrorProps>`
   width: 100%;
   height: 4rem;
-  margin: 0.5rem 0 2rem 0;
+  margin: 0.5rem 0 ${({ containsError }) => containsError ? 0 : '2rem'} 0;
   padding: 0.3rem;
   border-radius: 5px;
 `
@@ -105,4 +109,9 @@ export const LabelContainer = styled.div<LabelContainerProps>`
     text-transform: uppercase;
     cursor: pointer;
   }
+`
+
+export const ErrorMessage = styled.p`
+  color: ${({theme}) => theme.colors.bug};
+  padding: 0.5rem 0 1.5rem 0;
 `

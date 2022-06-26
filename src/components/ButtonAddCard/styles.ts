@@ -22,7 +22,7 @@ export const Container = styled.div`
 
     @media(max-width: ${SCREEN_BREAKPOINTS.EXTRA_LARGE}px) {
       margin: 2rem 2rem 0 2rem;
-  }
+    }
 
     @media(max-width: ${SCREEN_BREAKPOINTS.MEDIUM}px) {
       width: calc(100% - 4rem);
@@ -31,6 +31,6 @@ export const Container = styled.div`
 
       strong{
         font-size: 1.5rem;
+      }
     }
-  }
 `

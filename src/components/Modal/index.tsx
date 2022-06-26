@@ -17,7 +17,8 @@ import {
   ModalContent, 
   MultilineInput, 
   CategoriesContainer, 
-  LabelContainer
+  LabelContainer,
+  ErrorMessage
 } from './styles';
 
 interface ModalProps{
@@ -30,17 +31,25 @@ const Modal: React.FC<ModalProps> = ({visible}) => {
 
   const [title, setTitle] = useState<string | undefined>(selectedCard?.title);
   const [description, setDescription] = useState<string | undefined>(selectedCard?.description);
-  const [cardCategory, setCardCategory] = useState<ICategory | undefined>(selectedCard?.category);
+  const [cardCategory, setCardCategory] = useState<ICategory>(selectedCard?.category || ICategory.FEATURE);
+  const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     setTitle(selectedCard?.title);
     setDescription(selectedCard?.description);
-    setCardCategory(selectedCard?.category);
-  }, [selectedCard])
+    setCardCategory(selectedCard?.category || ICategory.FEATURE);
+  }, [selectedCard, visible])
 
   const handleSave = () => {
+
+    if (!title){
+      setErrorMessage("The title field can´t be empty!")
+      return;
+    }
+
+    setErrorMessage(undefined);
 
     if(!selectedCard?.id){
       const newCard = {
@@ -57,15 +66,23 @@ const Modal: React.FC<ModalProps> = ({visible}) => {
 
     }
 
-    const newCard = {
+    const updatedCard = {
       ...selectedCard,
       title,
       description,
       category: cardCategory
     }
-    dispatch(updateOneCard(newCard))
 
+    dispatch(updateOneCard(updatedCard))
     toggleVisibility(undefined);
+  }
+
+  const handleCloseModal = () => {
+    toggleVisibility(undefined);
+    setTitle(undefined);
+    setDescription(undefined);
+    setCardCategory(ICategory.FEATURE);
+    setErrorMessage(undefined);
   }
   
 
@@ -74,11 +91,22 @@ const Modal: React.FC<ModalProps> = ({visible}) => {
   return (
     <Container>
       <ModalContent>
-        <img src={CloseIcon} alt="Gray X icon" onClick={() => toggleVisibility(undefined)}/>
+        <img src={CloseIcon} alt="Gray X icon" onClick={handleCloseModal}/>
+
         <h3>Title</h3>
-        <Input value={title} onChange={(e) => setTitle(e.target.value)}/>
+        <Input value={title} onChange={(e) => setTitle(e.target.value)} minLength={1} maxLength={50} containsError={!!errorMessage}/>
+        {errorMessage && (
+          <ErrorMessage>{errorMessage}</ErrorMessage>
+        )}
+
         <h3>Description</h3>
-        <MultilineInput aria-multiline value={description} onChange={(e) => setDescription(e.target.value)}/>
+        <MultilineInput 
+          aria-multiline 
+          value={description} 
+          onChange={(e) => setDescription(e.target.value)} 
+          maxLength={300}
+        />
+
         <CategoriesContainer>
           {Object.values(ICategory).map(category => (
             <LabelContainer color={() => getCategoryBackgroundColor(theme, category)}>
@@ -95,7 +123,8 @@ const Modal: React.FC<ModalProps> = ({visible}) => {
             </LabelContainer>
           ))}
         </CategoriesContainer>
-        <Button type='button' onClick={handleSave}>Save Changes</Button>
+        <Button type='button' onClick={handleSave}>{selectedCard ? 'Save Changes' : 'Add card to Backlog'}</Button>
+
       </ModalContent>
     </Container>
   )
