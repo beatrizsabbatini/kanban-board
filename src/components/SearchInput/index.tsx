@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import SearchIcon from '../../assets/search.png'
-import { useAppDispatch } from '../../hooks/useRedux';
-import { clearFilters, filterCards } from '../../store/slices/cards.slice';
+import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
+import { clearFilters, filterCards, setSearchText } from '../../store/slices/cards.slice';
 import { Container } from './styles';
 
 const SearchInput: React.FC = () => {
-  const [searchText, setSearchText] = useState<string>('');
+  const { searchText } = useAppSelector((state => state.cards));
 
   const dispatch = useAppDispatch();
 
@@ -15,7 +15,7 @@ const SearchInput: React.FC = () => {
       dispatch(clearFilters());
       return;
     } else {
-      dispatch(filterCards({searchText}))
+      dispatch(filterCards({}))
     }
   }, [searchText])
   
@@ -25,7 +25,7 @@ const SearchInput: React.FC = () => {
         type='search' 
         placeholder='Search for cards titles...'
         value={searchText}
-        onChange={(e) => setSearchText(e.target.value)}
+        onChange={(e) => dispatch(setSearchText(e.target.value))}
       />
       <img src={SearchIcon} alt="Search icon"/>
     </Container>

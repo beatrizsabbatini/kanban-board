@@ -22,7 +22,7 @@ export const columnsSlice = createSlice({
       state.columns = action.payload;
      },
      updateColumns: (state, action) => {
-      console.log('COLUNS ENTROU')
+
       const cardId = action.payload
 
       const column = state.columns.find(item => item.id === IStatus.BACKLOG)

@@ -40,8 +40,6 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
 
-    console.log("destination: ", destination)
-
     if (!destination) return;
 
     if (
@@ -111,9 +109,6 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
       else return column;
     }) ;
 
-    console.log("newDestinationColumn: ", newDestinationColumn)
-    console.log("updatedColumns: ", updatedColumns)
-
     dispatch(setColumns(updatedColumns))
     dispatch(setCards(updatedCards))
 
@@ -156,6 +151,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ toggleTheme }) => {
             <FiltersContainer>
               {Object.values(ICategory).map(category => (
                 <LabelContainer 
+                  key={category}
                   color={() => getCategoryBackgroundColor(theme, category)}
                   onClick={() => handleChangeCheckbox(category)}
                 >

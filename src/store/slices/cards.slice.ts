@@ -6,10 +6,12 @@ import ICategory from "../../interfaces/ICategory";
 
 interface CardsSliceState {
   cards: ICard[],
+  searchText: string
 }
 
 const initialState: CardsSliceState = {
   cards: mockCards,
+  searchText: ''
 }
 
 export const cardsSlice = createSlice({
@@ -18,6 +20,9 @@ export const cardsSlice = createSlice({
   reducers: {
     setCards: (state, action) => {
       state.cards = action.payload
+    },
+    setSearchText: (state, action) => {
+      state.searchText = action.payload
     },
     addCard: (state, action) => {
       const card = action.payload
@@ -35,10 +40,8 @@ export const cardsSlice = createSlice({
       state.cards = updatedCards;
     },
     filterCards: (state, action) => {
-      const searchText = action.payload.searchText || '';
+      const searchText = state.searchText;
       const categories = action.payload.categories || Object.values(ICategory);
-
-      console.log("categories: ", categories)
 
       const filteredCards = [...state.cards]
         .map(card => {
@@ -67,6 +70,6 @@ export const cardsSlice = createSlice({
   }
 })
 
-export const { setCards, updateOneCard, filterCards, clearFilters, addCard } = cardsSlice.actions;
+export const { setCards, updateOneCard, filterCards, clearFilters, addCard, setSearchText } = cardsSlice.actions;
 
 export default cardsSlice.reducer;
